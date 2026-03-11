@@ -1,0 +1,9 @@
+fastapi==0.115.6
+uvicorn[standard]==0.32.1
+python-multipart==0.0.18
+pydantic-settings==2.6.1
+pymupdf==1.25.1
+minio==7.2.11
+pysolr==3.11.0
+sentence-transformers==3.3.1
+httpx==0.28.1

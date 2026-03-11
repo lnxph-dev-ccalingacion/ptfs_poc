@@ -1,0 +1,110 @@
+.add-field-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.add-field-modal {
+  background: #1e1e2e;
+  border: 1px solid #3b4261;
+  border-radius: 10px;
+  padding: 1.5rem;
+  max-width: 420px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.add-field-modal-title {
+  margin: 0 0 0.25rem 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #7aa2f7;
+}
+
+.add-field-modal-hint {
+  margin: 0 0 1rem 0;
+  font-size: 0.85rem;
+  color: #9aa5ce;
+}
+
+.add-field-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.add-field-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #a9b1d6;
+}
+
+.add-field-required {
+  color: #f7768e;
+}
+
+.add-field-input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.95rem;
+  color: #c0caf5;
+  background: #16161e;
+  border: 1px solid #3b4261;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.add-field-input::placeholder {
+  color: #6b7a9e;
+}
+
+.add-field-input:focus {
+  outline: none;
+  border-color: #7aa2f7;
+}
+
+.add-field-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+}
+
+.add-field-btn {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.add-field-btn--secondary {
+  background: transparent;
+  color: #9aa5ce;
+  border-color: #3b4261;
+}
+
+.add-field-btn--secondary:hover {
+  background: #2a2a3e;
+  color: #c0caf5;
+}
+
+.add-field-btn--primary {
+  background: #7aa2f7;
+  color: #1a1b26;
+}
+
+.add-field-btn--primary:hover:not(:disabled) {
+  background: #89b4fa;
+}
+
+.add-field-btn--primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
