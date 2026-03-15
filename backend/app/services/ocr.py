@@ -5,8 +5,12 @@ token is returned and the human review step is responsible for assigning
 keys/meaning.
 """
 from typing import Any
+import logging
+import random
 
 import fitz  # PyMuPDF
+
+logger = logging.getLogger("app.ocr")
 
 
 def extract_words_by_page(pdf_bytes: bytes) -> list[dict[str, Any]]:
@@ -53,7 +57,10 @@ def extract_key_value_fields(pdf_bytes: bytes) -> list[dict[str, Any]]:
       - pageIndex: 0-based page index
       - bbox: normalized 0-1 bbox (x, y, width, height)
     """
+    logger.info("OCR: opening PDF with PyMuPDF (fitz), size=%d bytes", len(pdf_bytes))
     pages = extract_words_by_page(pdf_bytes)
+    total_words = sum(len(p.get("words") or []) for p in pages)
+    logger.info("OCR: extracted %d pages, %d total words", len(pages), total_words)
     fields: list[dict[str, Any]] = []
     field_id = 1
     for page in pages:
@@ -70,6 +77,11 @@ def extract_key_value_fields(pdf_bytes: bytes) -> list[dict[str, Any]]:
                     "key": "Text",
                     "value": w["text"],
                     "pageIndex": page["page_index"],
+                    # PyMuPDF does not expose per-word confidence. For this POC,
+                    # assign a random confidence in [0.5, 1.0] so the UI can
+                    # demonstrate filtering and display. Replace this with a
+                    # real score when integrating a proper OCR engine.
+                    "confidence": round(random.uniform(0.5, 1.0), 2),
                     "bbox": {
                         "x": max(0.0, min(1.0, x0 / width)),
                         "y": max(0.0, min(1.0, y0 / height)),
@@ -79,4 +91,5 @@ def extract_key_value_fields(pdf_bytes: bytes) -> list[dict[str, Any]]:
                 }
             )
             field_id += 1
+    logger.info("OCR: returning %d fields (key=Text per word)", len(fields))
     return fields
